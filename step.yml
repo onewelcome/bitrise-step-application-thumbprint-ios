@@ -80,6 +80,11 @@ inputs:
       title: IPA path
       summary: The path to the IPA file
       is_required: true
+  - temporary_path: $BITRISE_SOURCE_DIR
+    opts:
+      title: Temporary path
+      summary: The path where the calculator will be downloaded
+      is_required: true
 
 outputs:
   - ONEGINI_APP_THUMBPRINT:
