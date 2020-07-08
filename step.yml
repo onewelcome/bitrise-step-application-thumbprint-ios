@@ -75,6 +75,12 @@ inputs:
       title: App Calculator version
       summary: The version of the Onegini App Calculator to be used
       is_required: true
+      value_options:
+        - "1.5.1"
+        - "1.5.0"
+        - "1.4.0"
+        - "1.3.0"
+        - "1.2.0"
   - application_path: $BITRISE_IPA_PATH
     opts:
       title: IPA path
