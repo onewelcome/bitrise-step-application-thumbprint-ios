@@ -1,5 +1,9 @@
 #!/bin/bash
-set -ex
+set -e
+
+if [[ "${is_debug}" == "yes" ]] ; then
+	set -x
+fi
 
 echo "This is 'onegini_artifactory_username': ${onegini_artifactory_username}"
 echo "This is 'onegini_artifactory_password': ${onegini_artifactory_password}"
@@ -14,15 +18,3 @@ unzip -o ${application_path} -d ${temporary_path}
 unzipped_app_path=$(find ${temporary_path} -name *.app) 
 application_thumbprint=$(java -jar ${calculator_download_path} ${unzipped_app_path} -q)
 envman add --key ONEGINI_APP_THUMBPRINT --value "${application_thumbprint}"
-
-# Envman can handle piped inputs, which is useful if the text you want to
-# share is complex and you don't want to deal with proper bash escaping:
-#  cat file_with_complex_input | envman add --KEY EXAMPLE_STEP_OUTPUT
-# You can find more usage examples on envman's GitHub page
-#  at: https://github.com/bitrise-io/envman
-
-#
-# --- Exit codes:
-# The exit code of your Step is very important. If you return
-#  with a 0 exit code `bitrise` will register your Step as "successful".
-# Any non zero exit code will be registered as "failed" by `bitrise`.
