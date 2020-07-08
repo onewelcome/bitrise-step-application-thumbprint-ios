@@ -41,7 +41,6 @@ workflows:
           file if you would not specify another value.
         run_if: true
         inputs:
-        - example_step_input: Example Step Input's value
         - onegini_artifactory_username: $ARTIFACTORY_USERNAME
         - onegini_artifactory_password: $ARTIFACTORY_PASSWORD
 
