@@ -5,16 +5,13 @@ echo "This is 'onegini_artifactory_username': ${onegini_artifactory_username}"
 echo "This is 'onegini_artifactory_password': ${onegini_artifactory_password}"
 echo "This is 'calculator_version': ${calculator_version}"
 echo "This is 'application_path': ${application_path}"
-echo "This is 'temporary_path': ${temporary_path}"
 
-result="0123456789ABCDEF"
+result="Signature not calculated"
 
-#
-# --- Export Environment Variables for other Steps:
-# You can export Environment Variables for other Steps with
-#  envman, which is automatically installed by `bitrise setup`.
-# A very simple example:
-envman add --key ONEGINI_APP_THUMBPRINT --value $result
+curl -u ${onegini_artifactory_username}:${onegini_artifactory_password} "https://repo.onegini.com/artifactory/onegini-sdk/com/onegini/mobile/sdk/ios/ios-app-signature-calculator/${calculator_version}/ios-app-signature-calculator-${calculator_version}.jar" -o "${temporary_path}/ios-app-signature-calculator-${calculator_version}.jar"
+unzip -o ${application_path} -d ${temporary_path}
+envman add --key ONEGINI_APP_THUMBPRINT --value "$(java -jar ${temporary_path}/ios-app-signature-calculator-${calculator_version}.jar $(find ${temporary_path} -name *.app))"
+
 # Envman can handle piped inputs, which is useful if the text you want to
 # share is complex and you don't want to deal with proper bash escaping:
 #  cat file_with_complex_input | envman add --KEY EXAMPLE_STEP_OUTPUT
