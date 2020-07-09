@@ -114,7 +114,7 @@ inputs:
     opts:
       category: Debug
       title: "Bundle ID"
-      description: |
+      summary: |
         In case you would like to calculate the signature 
         based on the provided bundle identifier rather than 
         the binary itself please provide bundle identifier of your app.
