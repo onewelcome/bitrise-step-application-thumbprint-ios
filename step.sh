@@ -8,7 +8,7 @@ fi
 curl_quiet_param="-sS"
 unzip_quiet_param="-q"
 if [[ "${is_debug}" == "yes" ]] ; then
-  curl_ quiet_param=""
+  curl_quiet_param=""
   unzip_quiet_param=""
 fi
 
