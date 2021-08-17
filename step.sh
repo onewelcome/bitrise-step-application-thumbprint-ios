@@ -25,7 +25,7 @@ calculator_url="https://repo.onegini.com/artifactory/onegini-sdk/com/onegini/mob
 calculator_download_path="${temporary_path}/ios-app-signature-calculator-${calculator_version}.jar"
 
 curl ${curl_quiet_param} -u ${onegini_artifactory_username}:${onegini_artifactory_password} ${calculator_url}  -o ${calculator_download_path}
-unzip ${unzip_quiet_param} -o ${application_path} -d ${temporary_path}
-unzipped_app_path=$(find ${temporary_path} -name *.app)
-application_thumbprint=$(java -jar ${calculator_download_path} ${unzipped_app_path} -q ${bundle_id_param} ${bundle_id})
+unzip ${unzip_quiet_param} -o "${application_path}" -d "${temporary_path}"
+unzipped_app_path=$(find "${temporary_path}" -name *.app)
+application_thumbprint=$(java -jar ${calculator_download_path} "${unzipped_app_path}" -q ${bundle_id_param} ${bundle_id})
 envman add --key ONEGINI_APP_THUMBPRINT --value "${application_thumbprint}"
